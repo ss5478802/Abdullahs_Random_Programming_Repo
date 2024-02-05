@@ -12,12 +12,15 @@ fun main() {
     println("My age is " + age + ".")
     println("Sum of 30 and 20 is " + (num1 + num2))
     */
-
+    // Small guessing game
     val maxNumber = 100
+    // Generates random number for user to guess
     val secretNumber = Random.nextInt(maxNumber) + 1
     var flag = true
+    // Creates an infinite loop
     while (flag) {
         print("Enter guess: ")
+        // Takes user input
         var ask = readLine()?.toIntOrNull() ?: -1
         if (ask == -1){
             println("Incorrect input!")
