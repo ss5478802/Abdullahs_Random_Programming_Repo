@@ -1,0 +1,2 @@
+# C_programs
+Actually this repository contains random mini-projects. Also it contains some file where I'm just writing code to learn new concepts such as OOP, or a new language such as Kotlin or Javascript.
