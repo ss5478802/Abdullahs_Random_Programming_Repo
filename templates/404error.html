@@ -1,0 +1,28 @@
+<!--html file for learning flask app-->
+<!--error_page-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error Page 404!</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{url_for('static', filename='faviconforflask.ico')}}"
+    />
+  </head>
+  <body style="background-color: lightcoral">
+    <h1 style="color: red; text-align: center">
+      <u><b>😬Whoops!😬</b></u>
+    </h1>
+    <h1 style="color: red; text-align: center">
+      <u>Looks like the {{error}}</u>
+    </h1>
+    <h1 style="color: red; text-align: center">
+      <u>But no worries. You can always go back to the home page!</u>
+    </h1>
+    <h1 style="text-align: center">
+      <a href='{{url_for("index")}}' style="color: green">Click Here</a> to go
+      back to home page! Enjoy 😉‼
+    </h1>
+  </body>
+</html>

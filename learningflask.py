@@ -1,5 +1,5 @@
 # Learning Flask microframework of Python
-from flask import Flask, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from markupsafe import escape
 from random import choice
 
@@ -34,10 +34,21 @@ colours_for_background = [
 ]
 
 
-
 @app.route("/")
 def index():
     return render_template("indexhtmlfileforflask.html")
+
+
+@app.route("/", methods=["POST"])
+def process_form():
+    name = request.form.get("name")
+    age = request.form.get("age")
+    if name and age:
+        return redirect(url_for("age", age=age, name=name))
+    elif name:
+        return redirect(url_for("hello_world", name=name))
+    else:
+        return redirect(url_for("age", age=age))
 
 
 @app.route("/<name>/")
@@ -66,6 +77,11 @@ def age(age, name=None):
         heading_colour=choice(colours_for_other_tags),
         bgcolour=choice(colours_for_background),
     )
+
+
+@app.errorhandler(404)
+def error_page(e):
+    return render_template("404error.html", error=str(e)[19:])
 
 
 if __name__ == "__main__":
