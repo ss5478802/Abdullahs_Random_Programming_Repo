@@ -1,0 +1,26 @@
+<!--html file for learning flask app-->
+<!--age-->
+<!DOCTYPE html>
+<html>
+    {%if persons_name != None%}
+        <head>
+            <title>Displaying name and age page!</title>
+            <link rel="icon" type="image/x-icon" href="{{url_for('static', filename = 'faviconforflask.ico')}}">
+        </head>
+        <body style="background-color: {{bgcolour}};">
+            <a href="{{url_for('hello_world', name = (persons_name or ' '))}}">Greetings page!</a>
+            <a href="{{url_for('index')}}">Click to go back to "Home" page</a>
+            <h1 style="color: {{heading_colour}}; font-family:serif;">Your name is {{persons_name}} and your age is {{persons_age}}!</h1>
+        </body>
+    {%else%}
+        <head>
+            <title>Displaying age page!</title>
+            <link rel="icon" type="image/x-icon" href="{{url_for('static', filename = 'faviconforflask.ico')}}">
+        </head>
+        <body style="background-color: {{bgcolour}};">
+            <a href="{{url_for('hello_world', name = (persons_name or ' '))}}">Greetings page!</a>
+            <a href="{{url_for('index')}}">Click to go back to "Home" page</a>
+            <h1 style="color: {{heading_colour}}; font-family:serif;">Your age is {{persons_age}}!</h1>
+        </body>
+    {%endif%}
+</html>

@@ -1,0 +1,12 @@
+<!--html file for learning flask app-->
+<!--hello_world-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Greetings page!</title>
+        <link rel="icon" type="image/x-icon" href="{{url_for('static', filename = 'faviconforflask.ico')}}">
+    </head>
+    <body style="background-color: {{bgcolour}};">
+        <h1 style="color:{{heading_colour}}; font-family:serif;">Hello {{persons_name}}!</h1>
+    </body>
+</html>
