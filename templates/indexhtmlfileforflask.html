@@ -15,6 +15,7 @@
     <h1 style="color: red; text-align: center">
       Welcome to Abdullah's Flask website!
     </h1>
+    <h1>If you like using the URL:</h1>
     <h2 style="color: blue; text-align: center">
       To get ur name only displayed, type the address followed by a slash
       followed by ur name.
@@ -38,7 +39,10 @@
       OR <br />
       http://192.168.0.100:5000/30/John
     </h3>
-
+    <h1>
+      If you don't like using the URL (you can fill either or both of the field
+      to get results just like the URL versions):
+    </h1>
     <form action="{{url_for('process_form')}}" method="post">
       <label for="name">Name:</label><br />
       <input id="name" type="text" name="name" /><br /><br />
