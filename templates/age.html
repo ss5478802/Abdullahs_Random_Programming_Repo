@@ -12,9 +12,6 @@
     />
   </head>
   <body style="background-color: {{bgcolour}};">
-    <a href="{{url_for('hello_world', name = (persons_name or ' '))}}"
-      >Greetings page!</a
-    >
     <a href="{{url_for('index')}}">Click to go back to "Home" page</a>
     <h1 style="color: {{heading_colour}}; font-family:serif;">
       Your name is {{persons_name}} and your age is {{persons_age}}!
@@ -30,9 +27,6 @@
     />
   </head>
   <body style="background-color: {{bgcolour}};">
-    <a href="{{url_for('hello_world', name = (persons_name or ' '))}}"
-      >Greetings page!</a
-    >
     <a href="{{url_for('index')}}">Click to go back to "Home" page</a>
     <h1 style="color: {{heading_colour}}; font-family:serif;">
       Your age is {{persons_age}}!

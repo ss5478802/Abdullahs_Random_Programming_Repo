@@ -45,9 +45,26 @@
     </h1>
     <form action="{{url_for('process_form')}}" method="post">
       <label for="name">Name:</label><br />
-      <input id="name" type="text" name="name" /><br /><br />
+      <!--Example of Regular Expression in HTML (pattern="[a-zA-z]+")-->
+      <input
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Text only!"
+        pattern="[a-zA-Z ]+"
+      /><br /><br />
       <label for="age">Age:</label><br />
-      <input id="age" type="number" name="age" /><br /><br />
+      <!--Example of JavaScript code in HTML attribute (oninput="validity.valid || (value = '');")-->
+      <input
+        id="age"
+        type="number"
+        min="1"
+        max="130"
+        name="age"
+        placeholder="1-130 only!"
+        style="width: 90px"
+        oninput="validity.valid || (value = '');"
+      /><br /><br />
       <input type="submit" value="Submit" />
     </form>
     <h1 style="text-align: center">Enjoy using my website!</h1>

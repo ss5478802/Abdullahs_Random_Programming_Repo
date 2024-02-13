@@ -44,11 +44,13 @@ def process_form():
     name = request.form.get("name")
     age = request.form.get("age")
     if name and age:
-        return redirect(url_for("age", age=age, name=name))
+        return redirect(url_for("age", age=age, name=name.title()))
     elif name:
-        return redirect(url_for("hello_world", name=name))
-    else:
+        return redirect(url_for("hello_world", name=name.title()))
+    elif age:
         return redirect(url_for("age", age=age))
+    else:
+        return redirect(url_for("index"))
 
 
 @app.route("/<name>/")
