@@ -1,0 +1,20 @@
+<!--File for diplaying error for hello_world function-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error! No valid name has been provided!</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{url_for('static', filename='faviconforflask.ico')}}"
+    />
+  </head>
+  <body>
+    <h1 style="color: red; text-align: center">
+      Name is missing. Enter your name in the URL!<br />
+      OR <br />
+      <a style="color: blue" href="{{url_for('index')}}">Click here</a>
+      to go back to home page!
+    </h1>
+  </body>
+</html>
