@@ -369,3 +369,22 @@ def quicksort(x):
 x = [100,87,5,3,-1,55,42,-99,-342,343,1000,-543,24,1,34,6,4,2,1,3045,-4534,20,-453]
 print(quicksort(x))
 """
+"""
+# For binary search algorithm, array should be sorted
+def binarysearch(array, target):
+    left = 0
+    right = len(array) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if array[mid] == target:
+            return f"Found At Index: {mid + 1}"
+        elif array[mid] > target:
+            right = mid - 1
+        else:
+            left = mid + 1
+    return "Not found!" 
+x = [100,87,5,3,-1,55,42,-99,-342,343,1000,-543,24,1,34,6,4,2,1,3045,-4534,20,-453]
+x = list(set(x))
+x.sort()
+print(binarysearch(x, 20))
+"""
