@@ -388,3 +388,87 @@ x = list(set(x))
 x.sort()
 print(binarysearch(x, 20))
 """
+
+
+class Node:
+    def __init__(self, value, next=None):
+        self.value = value
+        self.next = next
+
+
+n3 = Node(2)
+n2 = Node(3)
+n1 = Node(-1)
+n4 = Node(0)
+n5 = Node(100)
+n6 = Node(-7)
+n7 = Node(50)
+
+
+class SinglyLinkedList:
+    def __init__(self, head=None):
+        self.head = head
+
+    def append(self, new_node):
+        current = self.head
+        if current:
+            while current.next:
+                current = current.next
+            current.next = new_node
+        else:
+            self.head = new_node
+
+    def printlist(self):
+        current = self.head
+        list_to_print = []
+        while current:
+            list_to_print.append(current.value)
+            current = current.next
+        print(list_to_print)
+
+    def delete_node(self, node):
+        current = self.head
+        if current.value == node.value:
+            self.head = current.next
+        else:
+            while current:
+                if current.value == node.value:
+                    break
+                else:
+                    prev = current
+                    current = current.next
+            if current != None:
+                prev.next = current.next
+                current = None
+
+    def insert_node(self, new_node, position=None):
+        current = self.head
+        count = 1
+        if position == 1:
+            new_node.next = self.head
+            self.head = new_node
+        elif position == None:
+            self.append(new_node)
+        else:
+            while current:
+                if count + 1 == position:
+                    new_node.next = current.next
+                    current.next = new_node
+                    break
+                else:
+                    count += 1
+                    current = current.next
+
+
+l = SinglyLinkedList(n1)
+l.append(n2)
+l.append(n3)
+l.append(n4)
+l.append(n5)
+l.append(n6)
+l.append(n7)
+l.printlist()
+l.delete_node(n5)
+l.printlist()
+l.insert_node(Node(5), 4)
+l.printlist()

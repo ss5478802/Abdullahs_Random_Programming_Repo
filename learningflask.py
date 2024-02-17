@@ -1,6 +1,5 @@
 # Learning Flask microframework of Python
 from flask import Flask, request, render_template, redirect, url_for
-from markupsafe import escape
 from random import choice
 import re
 import requests
@@ -37,13 +36,17 @@ colours_for_background = [
     "antiquewhite",
 ]
 
+
 def jokes():
-    jokehtml = requests.get("https://api.api-ninjas.com/v1/jokes?limit=1", headers={'X-Api-Key': jokesapi()})
+    jokehtml = requests.get(
+        "https://api.api-ninjas.com/v1/jokes", headers={"X-Api-Key": jokesapi()}
+    )
     with open("joke.txt", "w") as f:
         f.write(jokehtml.json()[0]["joke"])
 
+
 schedule = BackgroundScheduler()
-schedule.add_job(jokes, "interval", days=1)
+schedule.add_job(jokes, "interval", hours = 2)
 schedule.start()
 
 
@@ -51,7 +54,7 @@ schedule.start()
 def index():
     with open("joke.txt", "r") as f:
         joke = f.read()
-    return render_template("indexhtmlfileforflask.html", jokehtml = joke)
+    return render_template("indexhtmlfileforflask.html", jokehtml=joke)
 
 
 @app.route("/", methods=["POST"])
