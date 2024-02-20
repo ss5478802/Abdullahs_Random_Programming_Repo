@@ -390,19 +390,19 @@ print(binarysearch(x, 20))
 """
 
 
-class Node:
+class NodeForSinglyLinkedList:
     def __init__(self, value, next=None):
         self.value = value
         self.next = next
 
 
-n3 = Node(2)
-n2 = Node(3)
-n1 = Node(-1)
-n4 = Node(0)
-n5 = Node(100)
-n6 = Node(-7)
-n7 = Node(50)
+n3 = NodeForSinglyLinkedList(2)
+n2 = NodeForSinglyLinkedList(3)
+n1 = NodeForSinglyLinkedList(-1)
+n4 = NodeForSinglyLinkedList(0)
+n5 = NodeForSinglyLinkedList(100)
+n6 = NodeForSinglyLinkedList(-7)
+n7 = NodeForSinglyLinkedList(50)
 
 
 class SinglyLinkedList:
@@ -428,6 +428,7 @@ class SinglyLinkedList:
 
     def delete_node(self, node):
         current = self.head
+        prev = None
         if current.value == node.value:
             self.head = current.next
         else:
@@ -470,5 +471,36 @@ l.append(n7)
 l.printlist()
 l.delete_node(n5)
 l.printlist()
-l.insert_node(Node(5), 4)
+l.insert_node(NodeForSinglyLinkedList(5), 4)
 l.printlist()
+
+class NodeForDoublyLinkedList:
+    def __init__(self, value, next = None, prev = None):
+        self.prev = prev
+        self.next = next
+        self.value = value
+
+class DoublyLinkedList:
+    def __init__(self, head = None):
+        self.head = head
+
+    def append(self, new_node):
+        current = self.head
+        if current:
+            while current.next:
+                current = current.next
+            current.next = new_node
+            new_node.prev = current
+        else:
+            self.head = new_node
+
+    def printlist(self):
+        current = self.head
+        list_to_print = []
+        while current:
+            list_to_print.append(current.value)
+            current = current.next
+        print(list_to_print)
+
+    def delete_node(self, node_to_delete):
+        pass

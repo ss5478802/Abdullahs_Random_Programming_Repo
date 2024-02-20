@@ -46,7 +46,7 @@ def jokes():
 
 
 schedule = BackgroundScheduler()
-schedule.add_job(jokes, "interval", hours = 2)
+schedule.add_job(jokes, "interval", days=1)
 schedule.start()
 
 
