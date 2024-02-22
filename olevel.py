@@ -389,7 +389,7 @@ x.sort()
 print(binarysearch(x, 20))
 """
 
-
+"""
 class NodeForSinglyLinkedList:
     def __init__(self, value, next=None):
         self.value = value
@@ -418,13 +418,13 @@ class SinglyLinkedList:
         else:
             self.head = new_node
 
-    def printlist(self):
+    def printlist(self, reverse = False):
         current = self.head
         list_to_print = []
         while current:
             list_to_print.append(current.value)
             current = current.next
-        print(list_to_print)
+        print(list_to_print if reverse == False else list_to_print[::-1])
 
     def delete_node(self, node):
         current = self.head
@@ -472,8 +472,8 @@ l.delete_node(n7)
 l.printlist()
 l.insert_node(NodeForSinglyLinkedList(5), 1)
 l.printlist()
-
-
+"""
+"""
 class NodeForDoublyLinkedList:
     def __init__(self, value, next=None, prev=None):
         self.prev = prev
@@ -495,13 +495,13 @@ class DoublyLinkedList:
         else:
             self.head = new_node
 
-    def printlist(self):
+    def printlist(self, reverse = False):
         current = self.head
         list_to_print = []
         while current:
             list_to_print.append(current.value)
             current = current.next
-        print(list_to_print)
+        print(list_to_print if reverse == False else list_to_print[::-1])
 
     def delete_node(self, node_to_delete):
         current = self.head
@@ -557,7 +557,47 @@ ld.delete_node(n33)
 ld.printlist()
 ld.insert_node(n55, 1)
 ld.printlist()
+"""
+class StackUsingArrays:
+    def __init__(self):
+        self.stack = []
 
-class CircularSinglyLinkedList:
-    pass
+    def isEmpty(self):
+        return len(self.stack) == 0
+    
+    def push(self, value):
+        self.stack.append(value)
+
+    def pop(self):
+        if self.isEmpty():
+            print("Stack is empty.")
+        else:
+            return self.stack.pop()
+        
+    def peek(self):
+        if self.isEmpty():
+            return "Stack is empty."
+        else:
+            return self.stack[-1]
+        
+    def size(self):
+        return len(self.stack)
+        
+
+s = StackUsingArrays()
+s.push(1)
+s.push(2)
+s.push(3)
+s.push(4)
+print(s.stack)
+print("Size of stack:", s.size())
+s.pop()
+print(s.stack)
+print("Peek:", s.peek())
+print("Size of stack:", s.size())
+print("Stack empty:", s.isEmpty())
+s.pop()
+s.pop()
+s.pop()
+print("Stack empty:", s.isEmpty())
 
