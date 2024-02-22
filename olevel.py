@@ -428,7 +428,6 @@ class SinglyLinkedList:
 
     def delete_node(self, node):
         current = self.head
-        prev = None
         if current.value == node.value:
             self.head = current.next
         else:
@@ -444,8 +443,8 @@ class SinglyLinkedList:
 
     def insert_node(self, new_node, position=None):
         current = self.head
-        count = 1
-        if position == 1:
+        count = 0
+        if position == 0:
             new_node.next = self.head
             self.head = new_node
         elif position == None:
@@ -469,19 +468,21 @@ l.append(n5)
 l.append(n6)
 l.append(n7)
 l.printlist()
-l.delete_node(n5)
+l.delete_node(n7)
 l.printlist()
-l.insert_node(NodeForSinglyLinkedList(5), 4)
+l.insert_node(NodeForSinglyLinkedList(5), 1)
 l.printlist()
 
+
 class NodeForDoublyLinkedList:
-    def __init__(self, value, next = None, prev = None):
+    def __init__(self, value, next=None, prev=None):
         self.prev = prev
         self.next = next
         self.value = value
 
+
 class DoublyLinkedList:
-    def __init__(self, head = None):
+    def __init__(self, head=None):
         self.head = head
 
     def append(self, new_node):
@@ -489,8 +490,8 @@ class DoublyLinkedList:
         if current:
             while current.next:
                 current = current.next
-            current.next = new_node
             new_node.prev = current
+            current.next = new_node
         else:
             self.head = new_node
 
@@ -503,4 +504,60 @@ class DoublyLinkedList:
         print(list_to_print)
 
     def delete_node(self, node_to_delete):
-        pass
+        current = self.head
+        if current.value == node_to_delete.value:
+            self.head = current.next
+        else:
+            while current:
+                if current.value == node_to_delete.value:
+                    break
+                else:
+                    prev = current
+                    current = current.next
+            if current != None:
+                prev.next = current.next
+                if current.next != None:
+                    current.next.prev = prev
+                current = None
+
+    def insert_node(self, new_node, position=None):
+        current = self.head
+        count = 0
+        if position == 0:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        elif position == None:
+            self.append(new_node)
+        else:
+            while current:
+                if count == position:
+                    new_node.prev = current.prev
+                    current.prev.next = new_node
+                    new_node.next = current
+                    current.prev = new_node
+                    break
+                else:
+                    count += 1
+                    current = current.next
+
+
+n11 = NodeForDoublyLinkedList(1)
+n22 = NodeForDoublyLinkedList(2)
+n33 = NodeForDoublyLinkedList(3)
+n44 = NodeForDoublyLinkedList(4)
+n55 = NodeForDoublyLinkedList(5)
+
+ld = DoublyLinkedList(n22)
+ld.append(n11)
+ld.append(n44)
+ld.append(n33)
+ld.printlist()
+ld.delete_node(n33)
+ld.printlist()
+ld.insert_node(n55, 1)
+ld.printlist()
+
+class CircularSinglyLinkedList:
+    pass
+
