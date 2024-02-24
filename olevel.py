@@ -558,6 +558,7 @@ ld.printlist()
 ld.insert_node(n55, 1)
 ld.printlist()
 """
+"""
 class StackUsingArrays:
     def __init__(self):
         self.stack = []
@@ -600,4 +601,106 @@ s.pop()
 s.pop()
 s.pop()
 print("Stack empty:", s.isEmpty())
+"""
 
+"""
+class QueueUsingArray:
+    def __init__(self):
+        self.queue = []
+
+    def isEmpty(self):
+        return len(self.queue) == 0
+
+    def enqueue(self, value):
+        self.queue.append(value)
+
+    def dequeue(self):
+        if self.isEmpty():
+            return "Queue is empty."
+        else:
+            return self.queue.pop(0)
+
+    def peek(self):
+        if self.isEmpty():
+            return "Queue is empty."
+        else:
+            return self.queue[0]
+
+    def size(self):
+        return len(self.queue)
+
+
+q = QueueUsingArray()
+q.enqueue(1)
+q.enqueue(2)
+q.enqueue(3)
+q.enqueue(4)
+print(q.queue)
+print("Size of queue:", q.size())
+q.dequeue()
+print(q.queue)
+print("Peek:", q.peek())
+print("Size of queue:", q.size())
+print("Queue empty:", q.isEmpty())
+q.dequeue()
+q.dequeue()
+q.dequeue()
+print("Queue empty:", q.isEmpty())
+"""
+
+
+class BinaryTreeNode:
+    def __init__(self, left=None, right=None, value=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def preOrderTraversal(node):
+    if node != None:
+        print(node.value, end=" ")
+        preOrderTraversal(node.left)
+        preOrderTraversal(node.right)
+
+
+def postOrderTraversal(node):
+    if node != None:
+        postOrderTraversal(node.left)
+        postOrderTraversal(node.right)
+        print(node.value, end=" ")
+
+
+def inOrderTraversal(node):
+    if node != None:
+        inOrderTraversal(node.left)
+        print(node.value, end=" ")
+        inOrderTraversal(node.right)
+
+
+node1 = BinaryTreeNode(value=10)
+node2 = BinaryTreeNode(value=11)
+node3 = BinaryTreeNode(value=9)
+node4 = BinaryTreeNode(value=10)
+node5 = BinaryTreeNode(value=8)
+node6 = BinaryTreeNode(value=12)
+node7 = BinaryTreeNode(value=10)
+
+node1.left = node3
+node1.right = node2
+
+node2.left = node4
+node2.right = node6
+
+node3.left = node5
+node3.right = node7
+
+print("In-order traversal of the binary tree:")
+inOrderTraversal(node1)
+print()
+
+print("Pre-order traversal of the binary tree:")
+preOrderTraversal(node1)
+print()
+
+print("Post-order traversal of the binary tree:")
+postOrderTraversal(node1)
