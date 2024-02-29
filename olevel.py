@@ -721,7 +721,7 @@ print()
 
 def search(node, target):
     if node == None:
-        return None
+        return "Node wasn't found! Node not in tree."
     elif node.value == target:
         return f"Node found! The node was {node.name}"
     elif target > node.value:
