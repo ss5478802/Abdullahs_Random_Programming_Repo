@@ -36,9 +36,7 @@ colours_for_background = [
 
 @app.route("/")
 def index():
-    with open("joke.txt", "r") as f:
-        joke = f.read()
-    return render_template("indexhtmlfileforflask.html", jokehtml=joke)
+    return render_template("indexhtmlfileforflask.html")
 
 
 @app.route("/", methods=["POST"])

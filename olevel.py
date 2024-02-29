@@ -390,6 +390,7 @@ print(binarysearch(x, 20))
 """
 
 """
+# Implementing Singly Linked List
 class NodeForSinglyLinkedList:
     def __init__(self, value, next=None):
         self.value = value
@@ -474,6 +475,7 @@ l.insert_node(NodeForSinglyLinkedList(5), 1)
 l.printlist()
 """
 """
+# Implementing Doubly Linked List
 class NodeForDoublyLinkedList:
     def __init__(self, value, next=None, prev=None):
         self.prev = prev
@@ -559,6 +561,7 @@ ld.insert_node(n55, 1)
 ld.printlist()
 """
 """
+# Implementing stack using array
 class StackUsingArrays:
     def __init__(self):
         self.stack = []
@@ -604,6 +607,7 @@ print("Stack empty:", s.isEmpty())
 """
 
 """
+# Implementing a queue using arrays
 class QueueUsingArray:
     def __init__(self):
         self.queue = []
@@ -649,16 +653,21 @@ print("Queue empty:", q.isEmpty())
 """
 
 
+# Implementing binary tree using nodes created using
+# classes (useful if the tree is modified more often than read)
+
+
 class BinaryTreeNode:
-    def __init__(self, left=None, right=None, value=None):
+    def __init__(self, name, left=None, right=None, value=None):
         self.value = value
         self.left = left
         self.right = right
+        self.name = name
 
 
 def preOrderTraversal(node):
     if node != None:
-        print(node.value, end=" ")
+        print(f"|{node.name}: {node.value}|", end="  ")
         preOrderTraversal(node.left)
         preOrderTraversal(node.right)
 
@@ -667,23 +676,23 @@ def postOrderTraversal(node):
     if node != None:
         postOrderTraversal(node.left)
         postOrderTraversal(node.right)
-        print(node.value, end=" ")
+        print(f"|{node.name}: {node.value}|", end="  ")
 
 
 def inOrderTraversal(node):
     if node != None:
         inOrderTraversal(node.left)
-        print(node.value, end=" ")
+        print(f"|{node.name}: {node.value}|", end="  ")
         inOrderTraversal(node.right)
 
 
-node1 = BinaryTreeNode(value=10)
-node2 = BinaryTreeNode(value=11)
-node3 = BinaryTreeNode(value=9)
-node4 = BinaryTreeNode(value=10)
-node5 = BinaryTreeNode(value=8)
-node6 = BinaryTreeNode(value=12)
-node7 = BinaryTreeNode(value=10)
+node1 = BinaryTreeNode("node1", value=10)
+node2 = BinaryTreeNode("node2", value=11)
+node3 = BinaryTreeNode("node3", value=9)
+node4 = BinaryTreeNode("node4", value=10.5)
+node5 = BinaryTreeNode("node5", value=8)
+node6 = BinaryTreeNode("node6", value=13)
+node7 = BinaryTreeNode("node7", value=9.5)
 
 node1.left = node3
 node1.right = node2
@@ -697,10 +706,99 @@ node3.right = node7
 print("In-order traversal of the binary tree:")
 inOrderTraversal(node1)
 print()
+print()
 
 print("Pre-order traversal of the binary tree:")
 preOrderTraversal(node1)
 print()
+print()
 
 print("Post-order traversal of the binary tree:")
 postOrderTraversal(node1)
+print()
+print()
+
+
+def search(node, target):
+    if node == None:
+        return None
+    elif node.value == target:
+        return f"Node found! The node was {node.name}"
+    elif target > node.value:
+        return search(node.right, target)
+    else:
+        return search(node.left, target)
+
+
+print(search(node1, 9.5))
+
+def insert(node, value):
+    if node == None:
+        return BinaryTreeNode(name="new_node", value = value)
+    else:
+        if value > node.value:
+            node.right = insert(node.right, value)
+        else:
+            node.left = insert(node.left, value)
+    return node
+
+insert(node1, 1)
+inOrderTraversal(node1)
+"""
+# Implementing binary tree using array
+# (useful if the tree is read more often than modified)
+nodes_of_binary_tree = [10, 9, 11, 8, 10, 10, 12]
+
+
+def left_node(index):
+    return 2 * index + 1
+
+
+def right_node(index):
+    return 2 * index + 2
+
+
+def preOrderTraversal(index):
+    if index < len(nodes_of_binary_tree):
+        return (
+            [nodes_of_binary_tree[index]]
+            + preOrderTraversal(left_node(index))
+            + preOrderTraversal(right_node(index))
+        )
+    else:
+        return []
+
+
+def inOrderTraversal(index):
+    if index < len(nodes_of_binary_tree):
+        return (
+            inOrderTraversal(left_node(index))
+            + [nodes_of_binary_tree[index]]
+            + inOrderTraversal(right_node(index))
+        )
+    else:
+        return []
+
+
+def postOrderTraversal(index):
+    if index < len(nodes_of_binary_tree):
+        return (
+            postOrderTraversal(left_node(index))
+            + postOrderTraversal(right_node(index))
+            + [nodes_of_binary_tree[index]]
+        )
+    else:
+        return []
+
+
+print("In-order traversal of the binary tree:")
+print(inOrderTraversal(0), end="\n\n")
+
+
+print("Pre-order traversal of the binary tree:")
+print(preOrderTraversal(0), end="\n\n")
+
+
+print("Post-order traversal of the binary tree:")
+print(postOrderTraversal(0), end="\n\n")
+"""
