@@ -13,6 +13,7 @@ In the spirit of inclusivity, everyone's invited to this coding party! Whether y
 ## Connect with Me
 
 If you're a fellow traveler on this coding journey, I'd love to connect! Feel free to reach out if you have any questions or suggestions or share resources that will help me learn programming effectively!
+
 My email address: abdullahabdurrahim1234@gmail.com
 
-Happy Coding!
+Happy Exploring!
