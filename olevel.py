@@ -732,9 +732,10 @@ def search(node, target):
 
 print(search(node1, 9.5))
 
+
 def insert(node, value):
     if node == None:
-        return BinaryTreeNode(name="new_node", value = value)
+        return BinaryTreeNode(name="new_node", value=value)
     else:
         if value > node.value:
             node.right = insert(node.right, value)
@@ -742,8 +743,22 @@ def insert(node, value):
             node.left = insert(node.left, value)
     return node
 
+
+def lowestNodeValue(node):
+    if node.left != None:
+        return lowestNodeValue(node.left)
+    else:
+        return node.value
+
+def highestNodeValue(node):
+    if node.right != None:
+        return highestNodeValue(node.right)
+    else:
+        return node.value
+
 insert(node1, 1)
 inOrderTraversal(node1)
+print(highestNodeValue(node1))
 """
 # Implementing binary tree using array
 # (useful if the tree is read more often than modified)
