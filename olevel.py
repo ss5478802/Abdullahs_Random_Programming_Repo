@@ -733,14 +733,14 @@ def search(node, target):
 print(search(node1, 9.5))
 
 
-def insert(node, value):
+def insert(node, value, name_of_the_node = None):
     if node == None:
-        return BinaryTreeNode(name="new_node", value=value)
+        return BinaryTreeNode(name="new_node" if name_of_the_node == None else name_of_the_node, value=value)
     else:
         if value > node.value:
-            node.right = insert(node.right, value)
+            node.right = insert(node.right, value, name_of_the_node)
         else:
-            node.left = insert(node.left, value)
+            node.left = insert(node.left, value, name_of_the_node)
     return node
 
 
@@ -748,16 +748,47 @@ def lowestNodeValue(node):
     if node.left != None:
         return lowestNodeValue(node.left)
     else:
-        return node.value
+        return node.name, node.value
+
 
 def highestNodeValue(node):
     if node.right != None:
         return highestNodeValue(node.right)
     else:
-        return node.value
+        return node.name, node.value
 
-insert(node1, 1)
+
+def delete_node(reference_node, node_to_delete):
+    if not reference_node:
+        return None
+
+    if node_to_delete.value < reference_node.value:
+        reference_node.left = delete_node(reference_node.left, node_to_delete)
+    elif node_to_delete.value > reference_node.value:
+        reference_node.right = delete_node(reference_node.right, node_to_delete)
+    else:
+        if reference_node.left == None and reference_node.right == None:
+            reference_node = None
+        elif reference_node.left == None:
+            reference_node = reference_node.right
+            reference_node.right = None
+        elif reference_node.right == None:
+            reference_node = reference_node.left
+            reference_node.left = None
+        else:
+            reference_node.name, reference_node.value = lowestNodeValue(reference_node.right)
+            reference_node.right = delete_node(reference_node.right, reference_node)
+
+    return reference_node
+
+
+insert(node1, 1, "abcd")
 inOrderTraversal(node1)
+print()
+print(highestNodeValue(node1))
+delete_node(node1, node6)
+inOrderTraversal(node1)
+print()
 print(highestNodeValue(node1))
 """
 # Implementing binary tree using array

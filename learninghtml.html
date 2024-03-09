@@ -18,5 +18,44 @@
         <h4>Image of the website:</h4>
         <img src="imageOfTheWebsiteOfTheLink.jpg" alt="www.w3schools.com/html" width = "100" height="100">
         <p style = "color:red;">This is a paragraph<br>with a line break and a red colour font.</p>
-        <a href = "http://192.168.0.100:5000">Here is a link to my other website. Click to explore!</a>
+        <h3 id="foo">Hello wewyey!</h3>
+        <h3 id="bar">Hello!</h3>
+        <form id="myform" onsubmit="return changee()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <input type="submit" value="Submit">
+        </form>
+        <button type="button" onclick="change()">Click me!</button>
+        
+        <script>
+            
+            function change(){
+                let x = document.getElementById("foo");
+                if (x.innerHTML === "Hello wewyey!"){
+                    document.getElementById("foo").innerHTML = "HELLO WORLD!!!";
+                    
+                }
+                else{
+                    document.getElementById("foo").innerHTML = "Hello wewyey!";
+                
+                }
+        }  
+
+            function changee(){
+                event.preventDefault();
+                const form = document.getElementById("myform");
+                const name = new FormData(form).get("name").replace(" ", "");
+                
+                if (name){
+                    document.getElementById("bar").innerHTML = `Hello ${name}!`;
+                }
+                else{
+                    document.getElementById("bar").innerHTML = "Hello!";
+                }
+                
+                return false;
+
+            }
+        </script>
+        <a href = "http://192.168.0.100:5000"><br><br>Here is a link to my other website. Click to explore!</a>
 </html>
