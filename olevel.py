@@ -663,27 +663,28 @@ class BinaryTreeNode:
         self.left = left
         self.right = right
         self.name = name
+        self.height = 0
 
 
-def preOrderTraversal(node):
-    if node != None:
-        print(f"|{node.name}: {node.value}|", end="  ")
-        preOrderTraversal(node.left)
-        preOrderTraversal(node.right)
+def preOrderTraversal(reference_node):
+    if reference_node != None:
+        print(f"|{reference_node.name}: {reference_node.value}|", end="  ")
+        preOrderTraversal(reference_node.left)
+        preOrderTraversal(reference_node.right)
 
 
-def postOrderTraversal(node):
-    if node != None:
-        postOrderTraversal(node.left)
-        postOrderTraversal(node.right)
-        print(f"|{node.name}: {node.value}|", end="  ")
+def postOrderTraversal(reference_node):
+    if reference_node != None:
+        postOrderTraversal(reference_node.left)
+        postOrderTraversal(reference_node.right)
+        print(f"|{reference_node.name}: {reference_node.value}|", end="  ")
 
 
-def inOrderTraversal(node):
-    if node != None:
-        inOrderTraversal(node.left)
-        print(f"|{node.name}: {node.value}|", end="  ")
-        inOrderTraversal(node.right)
+def inOrderTraversal(reference_node):
+    if reference_node != None:
+        inOrderTraversal(reference_node.left)
+        print(f"|{reference_node.name}: {reference_node.value}|", end="  ")
+        inOrderTraversal(reference_node.right)
 
 
 node1 = BinaryTreeNode("node1", value=10)
@@ -718,44 +719,87 @@ postOrderTraversal(node1)
 print()
 print()
 
-
-def search(node, target):
-    if node == None:
-        return "Node wasn't found! Node not in tree."
-    elif node.value == target:
-        return f"Node found! The node was {node.name}"
-    elif target > node.value:
-        return search(node.right, target)
+def getHeight(reference_node):
+    if not reference_node:
+        return 0
     else:
-        return search(node.left, target)
+        return reference_node.height
+
+def getBalanceFactor(reference_node):
+    if not reference_node:
+        return 0
+    else:
+        return getHeight(reference_node.left) - getHeight(reference_node.right)
+    
+def rightRotation(reference_node):
+    reference_node.left.right = reference_node
+    reference_node.left.height = 1 + max(getHeight(reference_node.left.left), getHeight(reference_node.left.right))
+    reference_node.left.right.height = 1 + max(getHeight(reference_node.left.right.left), getHeight(reference_node.left.right.right))
+    y = reference_node.left
+    reference_node = None
+    return y
+
+    
+
+def leftRotation(reference_node):
+    reference_node.right.left = reference_node
+    reference_node.right.height = 1 + max(getHeight(reference_node.right.left), getHeight(reference_node.right.right))
+    reference_node.right.left.height = 1 + max(getHeight(reference_node.right.left.left), getHeight(reference_node.right.left.right))
+    y = reference_node.right
+    reference_node = None
+    return y
+
+def search(reference_node, target):
+    if reference_node == None:
+        return "Node wasn't found! Node not in tree."
+    elif reference_node.value == target:
+        return f"Node found! The node was {reference_node.name}"
+    elif target > reference_node.value:
+        return search(reference_node.right, target)
+    else:
+        return search(reference_node.left, target)
 
 
 print(search(node1, 9.5))
 
 
-def insert(node, value, name_of_the_node = None):
-    if node == None:
+def insert(reference_node, value, name_of_the_node = None):
+    if reference_node == None:
         return BinaryTreeNode(name="new_node" if name_of_the_node == None else name_of_the_node, value=value)
     else:
-        if value > node.value:
-            node.right = insert(node.right, value, name_of_the_node)
+        if value > reference_node.value:
+            reference_node.right = insert(reference_node.right, value, name_of_the_node)
+            reference_node.height = 1 + max(getHeight(reference_node.left), getHeight(reference_node.right))
         else:
-            node.left = insert(node.left, value, name_of_the_node)
-    return node
-
-
-def lowestNodeValue(node):
-    if node.left != None:
-        return lowestNodeValue(node.left)
+            reference_node.left = insert(reference_node.left, value, name_of_the_node)
+            reference_node.height = 1 + max(getHeight(reference_node.left), getHeight(reference_node.right))
+    
+    balance = getBalanceFactor(reference_node)
+    if balance > 1 and getBalanceFactor(reference_node.left) > 0:
+        reference_node = rightRotation(reference_node)
+    elif balance < -1 and getBalanceFactor(reference_node.right) < 0:
+        reference_node = leftRotation(reference_node)
+    elif balance > 1 and getBalanceFactor(reference_node.left) < 0:
+        leftRotation(reference_node.left)
+        reference_node = rightRotation(reference_node)
     else:
-        return node.name, node.value
+        rightRotation(reference_node.right)
+        reference_node = leftRotation(reference_node)
+    return reference_node
 
 
-def highestNodeValue(node):
-    if node.right != None:
-        return highestNodeValue(node.right)
+def lowestNodeValue(reference_node):
+    if reference_node.left != None:
+        return lowestNodeValue(reference_node.left)
     else:
-        return node.name, node.value
+        return reference_node.name, reference_node.value
+
+
+def highestNodeValue(reference_node):
+    if reference_node.right != None:
+        return highestNodeValue(reference_node.right)
+    else:
+        return reference_node.name, reference_node.value
 
 
 def delete_node(reference_node, node_to_delete):
@@ -790,6 +834,8 @@ delete_node(node1, node6)
 inOrderTraversal(node1)
 print()
 print(highestNodeValue(node1))
+
+
 """
 # Implementing binary tree using array
 # (useful if the tree is read more often than modified)
