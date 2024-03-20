@@ -652,7 +652,7 @@ q.dequeue()
 print("Queue empty:", q.isEmpty())
 """
 
-
+"""
 # Implementing binary tree using nodes created using
 # classes (useful if the tree is modified more often than read)
 
@@ -719,35 +719,47 @@ postOrderTraversal(node1)
 print()
 print()
 
+
 def getHeight(reference_node):
     if not reference_node:
         return 0
     else:
         return reference_node.height
 
+
 def getBalanceFactor(reference_node):
     if not reference_node:
         return 0
     else:
         return getHeight(reference_node.left) - getHeight(reference_node.right)
-    
-def rightRotation(reference_node):
-    reference_node.left.right = reference_node
-    reference_node.left.height = 1 + max(getHeight(reference_node.left.left), getHeight(reference_node.left.right))
-    reference_node.left.right.height = 1 + max(getHeight(reference_node.left.right.left), getHeight(reference_node.left.right.right))
-    y = reference_node.left
-    reference_node = None
-    return y
 
-    
+
+def rightRotation(reference_node):
+    if reference_node != None:
+        x = reference_node.left
+        if x is None:
+            return reference_node
+        y = x.right
+        x.right = reference_node
+        reference_node.left = y
+        x.name, reference_node.name = reference_node.name, x.name
+        x.height = 1 + max(getHeight(x.left), getHeight(x.right))
+        reference_node.height = 1 + max(getHeight(reference_node.left), getHeight(reference_node.right))
+        return x
 
 def leftRotation(reference_node):
-    reference_node.right.left = reference_node
-    reference_node.right.height = 1 + max(getHeight(reference_node.right.left), getHeight(reference_node.right.right))
-    reference_node.right.left.height = 1 + max(getHeight(reference_node.right.left.left), getHeight(reference_node.right.left.right))
-    y = reference_node.right
-    reference_node = None
-    return y
+    if reference_node != None:
+        x = reference_node.right
+        if x is None:
+            return reference_node
+        y = x.left
+        x.left = reference_node
+        reference_node.right = y
+        x.name, reference_node.name = reference_node.name, x.name
+        x.height = 1 + max(getHeight(x.left), getHeight(x.right))
+        reference_node.height = 1 + max(getHeight(reference_node.right), getHeight(reference_node.left))
+        return x
+
 
 def search(reference_node, target):
     if reference_node == None:
@@ -763,29 +775,37 @@ def search(reference_node, target):
 print(search(node1, 9.5))
 
 
-def insert(reference_node, value, name_of_the_node = None):
+def insert(reference_node, value, name_of_the_node=None):
     if reference_node == None:
-        return BinaryTreeNode(name="new_node" if name_of_the_node == None else name_of_the_node, value=value)
+        return BinaryTreeNode(
+            name="new_node" if name_of_the_node == None else name_of_the_node,
+            value=value,
+        )
     else:
         if value > reference_node.value:
             reference_node.right = insert(reference_node.right, value, name_of_the_node)
-            reference_node.height = 1 + max(getHeight(reference_node.left), getHeight(reference_node.right))
+            reference_node.height = 1 + max(
+                getHeight(reference_node.left), getHeight(reference_node.right)
+            )
         else:
             reference_node.left = insert(reference_node.left, value, name_of_the_node)
-            reference_node.height = 1 + max(getHeight(reference_node.left), getHeight(reference_node.right))
-    
+            reference_node.height = 1 + max(
+                getHeight(reference_node.left), getHeight(reference_node.right)
+            )
+
     balance = getBalanceFactor(reference_node)
     if balance > 1 and getBalanceFactor(reference_node.left) > 0:
-        reference_node = rightRotation(reference_node)
+        return rightRotation(reference_node)
     elif balance < -1 and getBalanceFactor(reference_node.right) < 0:
-        reference_node = leftRotation(reference_node)
+        return leftRotation(reference_node)
     elif balance > 1 and getBalanceFactor(reference_node.left) < 0:
         leftRotation(reference_node.left)
-        reference_node = rightRotation(reference_node)
-    else:
+        return rightRotation(reference_node)
+    elif balance < -1 and getBalanceFactor(reference_node.right) > 0:
         rightRotation(reference_node.right)
-        reference_node = leftRotation(reference_node)
-    return reference_node
+        return leftRotation(reference_node)
+    else:
+        return reference_node
 
 
 def lowestNodeValue(reference_node):
@@ -808,20 +828,50 @@ def delete_node(reference_node, node_to_delete):
 
     if node_to_delete.value < reference_node.value:
         reference_node.left = delete_node(reference_node.left, node_to_delete)
+        reference_node.height = 1 + max(
+            getHeight(reference_node.left), getHeight(reference_node.right)
+        )
     elif node_to_delete.value > reference_node.value:
         reference_node.right = delete_node(reference_node.right, node_to_delete)
+        reference_node.height = 1 + max(
+            getHeight(reference_node.left), getHeight(reference_node.right)
+        )
     else:
         if reference_node.left == None and reference_node.right == None:
             reference_node = None
         elif reference_node.left == None:
             reference_node = reference_node.right
             reference_node.right = None
+            reference_node.height = 1 + max(
+            getHeight(reference_node.left), getHeight(reference_node.right)
+        )
         elif reference_node.right == None:
             reference_node = reference_node.left
             reference_node.left = None
+            reference_node.height = 1 + max(
+            getHeight(reference_node.left), getHeight(reference_node.right)
+        )
         else:
-            reference_node.name, reference_node.value = lowestNodeValue(reference_node.right)
+            reference_node.name, reference_node.value = lowestNodeValue(
+                reference_node.right
+            )
             reference_node.right = delete_node(reference_node.right, reference_node)
+            reference_node.height = 1 + max(
+            getHeight(reference_node.left), getHeight(reference_node.right)
+        )
+
+    if reference_node != None:
+        balance = getBalanceFactor(reference_node)
+        if balance > 1 and getBalanceFactor(reference_node.left) > 0:
+            reference_node = rightRotation(reference_node)
+        elif balance < -1 and getBalanceFactor(reference_node.right) < 0:
+            reference_node = leftRotation(reference_node)
+        elif balance > 1 and getBalanceFactor(reference_node.left) < 0:
+            leftRotation(reference_node.left)
+            reference_node = rightRotation(reference_node)
+        else:
+            rightRotation(reference_node.right)
+            reference_node = leftRotation(reference_node)
 
     return reference_node
 
@@ -834,7 +884,7 @@ delete_node(node1, node6)
 inOrderTraversal(node1)
 print()
 print(highestNodeValue(node1))
-
+"""
 
 """
 # Implementing binary tree using array
