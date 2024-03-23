@@ -4,16 +4,33 @@ This is a
 multiline
 comment
 */
+
+// Let's output a simple message
+// Note single quotes aren't allowed like print('Hello, World!')
 print("Hello, World!")
 
-// How to declare variables:
+// Let's define some variables
+var age : Int = 15
+// This is also valid:
+// var age = 15 (The type is inferred)
+// OR
+/* 
 var age : Int
-age = 15
-// OR var age = 15
-// OR var age : Int = 15
+age = 15 (This one gives more flexibility because you can assign the value later)
+*/
 
-// How to declare constant:
-let name : String = "Abdullah"
+// Let's define some constants
+let name : String = "Abdullah Abdur Rahim"
+// OR
+// let name = "Abdullah Abdur Rahim" (The type is inferred here)
 
-//String Interpolation
-print("Hello! My name is \(name) and my age is \(age).")
+// How to do string interpolation (commonly known as format string in Python)
+var message = "Hello \(name)! Your age is \(age)."
+print(message)
+// OR 
+// print("Hello \(name)! Your age is \(age).")
+
+var favouriteLetter : Character
+
+favouriteLetter = "A"
+print("Your favourite letter is \(favouriteLetter)!")
