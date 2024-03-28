@@ -11,9 +11,11 @@ fun main(){
     // However this prints the message without a newline
     print("Hello, World");
     // To see the difference, let's write another println statement
-    println("Hello, World")
+    println("Hello, World");
     /*  Output is :
     Hello, World
     Hello, WorldHello, World
     */
+    // Let's make some variables
+    var age = 15;
 }

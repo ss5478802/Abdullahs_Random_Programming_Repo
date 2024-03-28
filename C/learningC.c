@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 
 // Trying to learn C!
+// In C, a "main" function is required. Without it, C compiler will raise an error. 
 
 int main(){
 	
@@ -15,6 +17,7 @@ int main(){
 	// This is another way of declaring variables
 	char favouriteLetter;
 	favouriteLetter = 'A';
+	char name[char] = "dsgrsfh";
 
 	// Basic Data Types: character (char), integer (int), float (float), double (double)
 	// A float has less precision than a double, 6 vs 15 possible decimal places respectively.

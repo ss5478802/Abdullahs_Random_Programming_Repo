@@ -34,3 +34,13 @@ var favouriteLetter : Character
 
 favouriteLetter = "A"
 print("Your favourite letter is \(favouriteLetter)!")
+// Basic data types in Swift are:
+// 1. String
+// 2. Character
+// 3. Int
+// 4. Float
+// 5. Double
+// 6. Bool
+// 7. Dictionary
+// 8. Array
+// 9. Set

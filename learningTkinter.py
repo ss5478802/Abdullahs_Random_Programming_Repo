@@ -1,28 +1,19 @@
+# Learning tkinter
 from tkinter import *
-import pyperclip
+#import pyperclip
 
+# Everything in tkinter is a widget (like a block)
+# app is the main (biggest) block. Inside this we will add smaller widget (blocks)
 app = Tk()
-fg = "white"
-bg = "black"
-def change_bg(label, label2):
-    global fg, bg
-    if label.get(1.0, END).replace("\n", "") == "":
-        fg, bg = bg, fg
-        label2.config(fg=fg, bg=bg)
-    else:
-        try:
-            fg, bg = label.get(1.0, END).split(", ")
-            bg = bg.replace("\n", "")
-            label2.config(fg=fg, bg=bg)
-            label.delete(1.0, END)
-        except:
-            label.delete(1.0, END)
 
+# Defines the default dimension of the main block (widget). So the window can be resized by the user later.
+app.geometry("300x50")
 
-greeting = Label(text="Hello, World!", bg="black", fg="white")
-greeting.pack()
-fore = Text(height=10)
-fore.pack()
-changeBg = Button(text="Click me!", command=lambda: change_bg(fore, greeting))
-changeBg.pack()
+# This is a label. This displays the text "Hello, World". This label is like a small block in the main window.
+myLabel = Label(app, text="Hello, World!")
+
+# This puts (pushes) the small block into the main window.
+myLabel.pack()
+
+# This starts the app and cause the app to run indefinetely until the user exits the app
 app.mainloop()

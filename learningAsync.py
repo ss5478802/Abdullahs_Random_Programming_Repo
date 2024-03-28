@@ -1,26 +1,24 @@
 import asyncio
-import time
 
 
 async def fun1():
-    print("started fun1")
+    print("Function 1 started...")
     await asyncio.sleep(7)
-    print("ended fun1")
+    print("Function 1 ended!")
 
 
 async def fun2():
-    print("started fun2")
-    await asyncio.sleep(3)
-    print("ended fun2")
+    print("Function 2 started...")
+    await asyncio.sleep(5)
+    print("Function 2 ended!")
 
 
 async def main():
-    s = time.time()
-    a = asyncio.create_task(fun1())
-    b = asyncio.create_task(fun2())
-    await a
-    await b
-    print(f"took {time.time() - s} seconds")
+    task1 = asyncio.create_task(fun1())
+    task2 = asyncio.create_task(fun2())
+    await task2
+    await task1
+    #await asyncio.gather(fun2(),fun1())
 
 
 asyncio.run(main())
