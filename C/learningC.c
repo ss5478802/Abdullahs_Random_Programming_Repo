@@ -17,7 +17,7 @@ int main(){
 	// This is another way of declaring variables
 	char favouriteLetter;
 	favouriteLetter = 'A';
-	char name[char] = "dsgrsfh";
+	char name[7] = "dsgrsfh";
 
 	// Basic Data Types: character (char), integer (int), float (float), double (double)
 	// A float has less precision than a double, 6 vs 15 possible decimal places respectively.

@@ -606,7 +606,7 @@ s.pop()
 print("Stack empty:", s.isEmpty())
 """
 
-
+"""
 # Implementing a queue using arrays
 class QueueUsingArray:
     def __init__(self):
@@ -650,9 +650,9 @@ q.dequeue()
 q.dequeue()
 q.dequeue()
 print("Queue empty:", q.isEmpty())
+"""
 
-
-
+"""
 # Implementing binary tree using nodes created using
 # classes (useful if the tree is modified more often than read)
 
@@ -877,9 +877,17 @@ def delete_node(reference_node, node_to_delete):
 
 
 def breadthFirstSearch(reference_node):
-    pass
+    queue = QueueUsingArray()
+    queue.enqueue(reference_node)
+    while queue.isEmpty() == False:
+        node_to_print = queue.dequeue()
+        print(node_to_print.value, end=" ")
+        if node_to_print.left:
+            queue.enqueue(node_to_print.left)
+        if node_to_print.right:
+            queue.enqueue(node_to_print.right)
 
-
+breadthFirstSearch(node1)
 
 
 insert(node1, 1, "abcd")
@@ -890,7 +898,7 @@ delete_node(node1, node6)
 inOrderTraversal(node1)
 print()
 print(highestNodeValue(node1))
-
+"""
 
 """
 # Implementing binary tree using array
@@ -950,3 +958,5 @@ print(preOrderTraversal(0), end="\n\n")
 print("Post-order traversal of the binary tree:")
 print(postOrderTraversal(0), end="\n\n")
 """
+
+
