@@ -31,8 +31,8 @@ Name: {self.name}
 Age: {self.age}
 Hometown: {self.hometown}
 Occupation: {self.occupation}
-Skills: {self.skills if self.skills != [] else None}
-Favourite food: {self.favourite_food if self.favourite_food != "" else None}.
+Skills: {self.skills if self.skills != [] else "No skills"}
+Favourite food: {self.favourite_food if self.favourite_food != "" else "No favourite food"}
 """
 
     # Method to update occupation
@@ -43,11 +43,20 @@ Favourite food: {self.favourite_food if self.favourite_food != "" else None}.
         else:
             print("Invalid input. Try again.")
 
-    def add_skills(self, new_skills):
-        pass
+    def add_skills(self, *new_skills):
+        for list_of_skills in new_skills:
+            if isinstance(list_of_skills, (list,tuple)):
+                for new_skill in list_of_skills:
+                    if new_skill.strip() != "":
+                        self.skills.append(new_skill.capitalize())
+            else:
+                if list_of_skills.strip() != "":
+                    self.skills.append(list_of_skills.capitalize())
 
 # Created an instance of the class Person (or more like created an object)
-person1 = Person("Abd", 12, "Feni", "Painter")
-print(person1)
-person1.greet_someone("Jo")
-person1.update_age(15)
+person_Abd = Person("Abd", 12, "Feni", "Painter")
+print(person_Abd)
+person_Abd.greet_someone("Jo")
+person_Abd.update_age(15)
+person_Abd.add_skills("solve Rubik's cube", "Ride bicycle", "Programming")
+print(person_Abd)

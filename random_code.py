@@ -959,4 +959,22 @@ print("Post-order traversal of the binary tree:")
 print(postOrderTraversal(0), end="\n\n")
 """
 
+"""
+from pyzbar.pyzbar import decode
+import segno
+import cv2
+
+qrw = segno.make_qr("""
+https://www.google.com
+""")
+qrw.save("my_py_qr_code.png",scale=10)
+
+img = cv2.imread("my_py_qr_code.png")
+
+decodedd = decode(img)
+for i in decodedd:
+    print(i.data.decode("utf-8"))
+"""
+
+
 
